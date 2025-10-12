@@ -17,7 +17,8 @@ def display_welcome():
     print("This is a simple file manager to demonstrate")
     print("Python fundamentals: variables, expressions,")
     print("statements, and functions.")
-    # TODO: Add a blank line after the welcome message
+    print()
+    # TODO: Add a blank line after the welcome message - Done
 
 
 def get_user_choice():
@@ -30,7 +31,8 @@ def get_user_choice():
     print()
 
     choice = input("Enter your choice (help/calc/info/quit): ").strip().lower()
-    # TODO: Add code to return the choice
+    return choice
+    # TODO: Add code to return the choice - Done
 
 
 def display_help():
@@ -71,17 +73,17 @@ def display_info():
 
 
 # TODO - Set the keyword arguments such that;
-# 1. show_goodbye defaults to True
-# 2. goodbye_message defaults to "Thank you for using Python CLI File Manager!"
-# 3. invalid_choice_prefix defaults to "Invalid choice:"
-# 4. valid_commands defaults to "help, calc, info, quit"
+# 1. show_goodbye defaults to True - Done
+# 2. goodbye_message defaults to "Thank you for using Python CLI File Manager!" - Done
+# 3. invalid_choice_prefix defaults to "Invalid choice:" - Done
+# 4. valid_commands defaults to "help, calc, info, quit" - Done
 def process_user_command(
     choice,
     running,
-    show_goodbye,
-    goodbye_message,
-    invalid_choice_prefix,
-    valid_commands,
+    show_goodbye = True,
+    goodbye_message = "Thank you for using Python CLI File Manager",
+    invalid_choice_prefix = "Invalid choice",
+    valid_commands = "help, calc, info, quit",
 ):
     """
     Process a user command and return the updated running state.
@@ -120,11 +122,13 @@ def process_user_command(
 
 def main():
     """Main program loop."""
+    display_welcome()
     # Display welcome message
-    # TODO: Call the function to display the welcome message
+    # TODO: Call the function to display the welcome message - Done
 
     # Main command loop
-    # TODO: Initialize a variable to control the loop. Hint set running = True
+    # TODO: Initialize a variable to control the loop. Hint set running = True - Done
+    running = True
     while running:
         try:
             choice = get_user_choice()
