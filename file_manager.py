@@ -34,10 +34,21 @@ def format_file_size(size_bytes, precision=2, use_binary=True):
         units = ['bytes', 'KB', 'MB', 'GB', 'TB', 'PB']
         divisor = 1000
     
-    # TODO: Students implement the conversion algorithm
-    # This involves loops, mathematical operations, and formatting
-    
+    unit_index = 0
+    size = float(size_bytes)
+
+    while size >= divisor and unit_index < len(units) - 1:
+        size /= divisor
+        unit_index += 1
+
+        if unit_index == 0:
+         formatted_size = f"{int(size)} {units[unit_index]}"
+    else:
+        formatted_size = f"{size:.{precision}f} {units[unit_index]}"
     return formatted_size
+
+    # TODO: Students implement the conversion algorithm
+    # This involves loops, mathematical operations, and formatting - Done
 
 
 def get_and_display_file_size(filename):
@@ -87,12 +98,15 @@ def list_directory_tree(directory, prefix="", max_depth=3, current_depth=0):
     # Base case 1: Invalid directory
     if not os.path.isdir(directory):
         print(f"Error: '{directory}' is not a valid directory.")
-        # TODO: return None for the base case
+        return None
+
+        # TODO: return None for the base case - Done
 
     # Base case 2: Maximum depth reached
     if current_depth >= max_depth:
         print(f"{prefix}... (max depth reached)")
-        # TODO: return None for yet another base case
+        return None
+        # TODO: return None for yet another base case - Done
 
     try:
         # Get and sort directory contents
@@ -101,7 +115,8 @@ def list_directory_tree(directory, prefix="", max_depth=3, current_depth=0):
         # Base case 3: Empty directory
         if not items:
             print(f"{prefix}(empty directory)")
-            # TODO: return None for yet another base case
+            return None
+            # TODO: return None for yet another base case - Done
 
         for i, item in enumerate(items):
             item_path = os.path.join(directory, item)
@@ -126,8 +141,9 @@ def list_directory_tree(directory, prefix="", max_depth=3, current_depth=0):
             elif os.path.isdir(item_path):
                 # Display directory and recurse
                 print(f"{current_prefix}{item}/")
+                list_directory_tree(item_path, next_prefix, max_depth, current_depth + 1)
                 # Recursive case: explore subdirectory
-                # TODO: perform recursive function call
+                # TODO: perform recursive function call - Done
 
     except (OSError, PermissionError) as e:
         print(f"{prefix}Error accessing directory: {e}")
@@ -139,12 +155,13 @@ def find_files_by_extension(directory, extension, current_path=""):
     """
     # Base case: Invalid directory
     if not os.path.isdir(directory):
-        # TODO: return an empty list for the base case
-        # TODO: remove the pass statement below, only added to avoid syntax error
-        pass
+        return []
+        # TODO: return an empty list for the base case - Done
+        # TODO: remove the pass statement below, only added to avoid syntax error - Done
 
-    # TODO: Initialize found_files as an empty list
-
+    # TODO: Initialize found_files as an empty list - Done
+    
+    found_files = []
     try:
         for item in os.listdir(directory):
             item_path = os.path.join(directory, item)
@@ -160,10 +177,10 @@ def find_files_by_extension(directory, extension, current_path=""):
             elif os.path.isdir(item_path):
                 # Recursive case: Search in subdirectory
                 sub_path = os.path.join(current_path, item) if current_path else item
-                # TODO recursively call find_files_by_extension
-                # TODO: Extend found_files with results from recursive call
-               
-
+                # TODO recursively call find_files_by_extension - Done
+                found_files.extend(find_files_by_extension(item_path, extension, sub_path))
+                # TODO: Extend found_files with results from recursive call - Done 
+                
     except (OSError, PermissionError):
         pass  # Skip inaccessible directories
 
